@@ -9,7 +9,8 @@ import {
     GET_REPOS,
     REMOVE_ALERT,
     GET_USER,
-    SEARCH_HISTORY
+    SEARCH_HISTORY,
+    CLEAR_USERS
 } from '../type';
 
 const GithubState = (props) => {
@@ -28,12 +29,8 @@ const GithubState = (props) => {
     //Search User
 
     const filterUsers = async (user) => {
-        //setLoading();
-    
+        setLoading();
         const res = await axios.get(`https://api.github.com/search/users?q=${user}`);
-        // const history = [...searchHistory];
-        // history.push(user);
-        
         dispatch({
             type:SEARCH_USERS,
             payload: res.data.items
@@ -41,18 +38,34 @@ const GithubState = (props) => {
       }
 
     //GET Repos
-
-
+  
+    const getUserRepos = async (username) => {
+        setLoading();
+        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`);
+        dispatch({
+            type: GET_REPOS,
+            payload:res.data
+        })
+      }
 
     //GET user 
 
+    const getUser = async (username) => {
+        setLoading();
+        const res = await axios.get(`https://api.github.com/users/${username}`);
+        dispatch({
+            type: GET_USER,
+            payload:res.data
+        })
+    }
 
     //clear users
 
+    const clearUsers = () => dispatch({type: CLEAR_USERS});
 
     //loading
 
-    //const setLoading = dispatch({type: SET_LOADING});
+    const setLoading = () => dispatch({type: SET_LOADING});
 
 
     return <GithubContext.Provider 
@@ -62,7 +75,10 @@ const GithubState = (props) => {
             repos:state.repos,
             searchHistory: state.searchHistory,
             loading:state.loading,
-            filterUsers
+            filterUsers,
+            clearUsers,
+            getUser,
+            getUserRepos
         }}
     >
         {props.children}
