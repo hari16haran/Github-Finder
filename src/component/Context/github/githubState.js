@@ -4,12 +4,12 @@ import GithubContext from '../github/githubContext';
 import GithubReducer from '../github/githubReducer';
 import {
     SEARCH_USERS,
-    SET_ALERT,
+    //SET_ALERT,
     SET_LOADING,
     GET_REPOS,
-    REMOVE_ALERT,
+    //REMOVE_ALERT,
     GET_USER,
-    SEARCH_HISTORY,
+    //SEARCH_HISTORY,
     CLEAR_USERS
 } from '../type';
 

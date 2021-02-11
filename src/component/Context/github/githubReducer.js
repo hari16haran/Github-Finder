@@ -1,15 +1,15 @@
 import {
     SEARCH_USERS,
-    SET_ALERT,
+    //SET_ALERT,
     SET_LOADING,
     GET_REPOS,
-    REMOVE_ALERT,
+    //REMOVE_ALERT,
     GET_USER,
-    SEARCH_HISTORY,
+    //SEARCH_HISTORY,
     CLEAR_USERS
 } from '../type';
 
-export default (state, action) => {
+const rootReducer = (state, action) => {
     switch(action.type) {
         case SEARCH_USERS:
             // let arr = [];
@@ -48,3 +48,5 @@ export default (state, action) => {
 
     }
 }
+
+export default rootReducer;
